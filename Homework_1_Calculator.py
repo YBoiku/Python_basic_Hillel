@@ -7,7 +7,7 @@ if return_case == 1:
     addition = value_1 + value_2
     print(addition)
 elif return_case == 2:
-    value_1 = float(input("Первое уменьшимое: "))
+    value_1 = float(input("Первое уменьшаемое: "))
     value_2 = float(input("Второе вычитаемое: "))
     subtraction = value_1 - value_2
     print(subtraction)
