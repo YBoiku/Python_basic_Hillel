@@ -3,7 +3,6 @@ def calculated():
         input_case = input("Выбери тип операции:\n1: Сложение\n2: Вычитание\n3: Умножение\n4: Деление"
                            "\n5: Возведение в степень\n6: Квадратный корень из числа\nВыбор операции: ")
         return_case = int(input_case)
-
         if return_case == 1:
             try:
                 value_1 = float(input("Первое слагаемое: "))
