@@ -61,7 +61,7 @@ def calculated():
 
 calculated()
 while True:
-    new_start = (input("еще раз? Да/Нет: ")).lower()
+    new_start = (input("Хотите посчитать еще раз? Да/Нет: ")).lower()
     if new_start == 'да':
         calculated()
     else:
