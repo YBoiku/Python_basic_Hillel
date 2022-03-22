@@ -31,7 +31,7 @@ elif return_case == 5:
     print(exponentiation)
 elif return_case == 6:
     value_1 = float(input("Число под корнем: "))
-    square_root = value_1 * 0.5
+    square_root = value_1 ** 0.5
     print(square_root)
 else:
     print("Вы ограниченны вышеперечисленным списком операций")
