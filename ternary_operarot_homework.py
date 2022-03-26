@@ -12,7 +12,7 @@ new_value = True if value < 100 else False
 print(new_value)
 ###################### 4 ######################
 my_str = "qwer"
-new_str = my_str + my_str if len(my_str) < 5 else my_str
+new_str = my_str * 2 if len(my_str) < 5 else my_str
 print(new_str)
 ###################### 5 ######################
 my_str = "qwer"
