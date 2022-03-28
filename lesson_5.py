@@ -20,7 +20,7 @@
 # for item in enumerate(my_str):
 #     print(item)
 
-###################### str methods ######################
+###################### str methods #####################
 # my_str = "qwerty123456"
 # my_str = "qwerty"
 # my_str = "Qwe.rtY"
