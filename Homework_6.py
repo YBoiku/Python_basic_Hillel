@@ -11,7 +11,7 @@ for new_list in my_list:
         my_result.append(new_list)
 print(my_result)
 ####################### 3 #######################
-my_list = [100, 1, 365, 48, 2, 48, 60]
+my_list = [100, 1, 365, 2, 48, 60]
 # my_list = [1]
 if len(my_list) < 2:
     my_list.append(0)
