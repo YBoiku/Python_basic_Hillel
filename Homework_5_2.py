@@ -92,7 +92,6 @@ my_string_1 = "aaaasdf1"
 my_string_2 = "asdfff2"
 new_list = []
 for some_sym in set(my_string_1):
-    if my_string_1.count(some_sym) == 1:
-        if my_string_2.count(some_sym) == 1:
-            new_list.append(some_sym)
+    if my_string_1.count(some_sym) == 1 and my_string_2.count(some_sym) == 1:
+        new_list.append(some_sym)
 print(new_list)
