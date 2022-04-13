@@ -1,11 +1,11 @@
 ######################## 1 ########################
 my_list = ["N-iX", "AUTO DOC", "EPAM", "Sigma Software", "Ciklum", "DataArt"]
 new_my_list = []
-for index_companies, companies_names in enumerate(my_list):
+for index_companies, companies_name in enumerate(my_list):
     if index_companies % 2 != 0:
-        new_my_list.append(companies_names)
+        new_my_list.append(companies_name)
     else:
-        reversed_company = companies_names[::-1]
+        reversed_company = companies_name[::-1]
         new_my_list.append(reversed_company)
 ######################## 2 ########################
 my_list = ["N-iX", "AUTO DOC", "EPAM", "Sigma Software", "Ciklum", "DataArt", "Luxoft", "Genesis"]
