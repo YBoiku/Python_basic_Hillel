@@ -51,4 +51,26 @@ def list_of_dates_dict_from_file(path_and_filename):
 
 dates_from_file = list_of_dates_dict_from_file('Homework text/authors.txt')
 
+
 ######################## 4 ########################
+def list_of_converted_dates_dict_from_file(path_and_filename):
+    with open(path_and_filename, 'r') as my_file:
+        all_information_from_file = my_file.read()
+    dates = []
+    for data_line in all_information_from_file.split('\n'):
+        only_some_date = data_line.split()[0:3]
+        only_some_date = ' '.join(only_some_date)
+        for split_some_date in only_some_date.split('-'):
+            only_some_date = split_some_date.split()[0:3]
+            if len(only_some_date) > 2:
+                only_some_date = ' '.join(only_some_date)
+                dates.append(only_some_date)
+    for new in data_line.split('st'):
+
+    with open(path_and_filename, 'w') as new_txt_file:
+        new_txt_file.write(all_information_from_file)
+    return dates
+
+
+converted_dates_from_file = list_of_converted_dates_dict_from_file('Homework text/authors.txt')
+print(converted_dates_from_file)
