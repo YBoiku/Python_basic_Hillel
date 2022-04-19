@@ -3,16 +3,41 @@
 # Типы переменных | анотация типов
 # Импорт функций
 
+import os
+from utils.files import read_txt_file_as_str
 
-def read_txt_file(filename: str = 'test.txt', debug_mod: bool = True) -> str:
-    with open(filename, 'r', encoding='utf-8') as my_file:
-        data = my_file.read()
-    if debug_mod:
-        print(data)
-    return data
+path = "Homework text"
+list_dir = os.listdir(path)
+# print(list_dir)
+
+filename = 'names.txt'
+base_dir = ''
+data = read_txt_file_as_str(f'{path}/{base_dir}/{filename}')
+# data = read_txt_file_as_str(os.path.join(path, filename))
+# print(data)
+
+for filename in list_dir:
+    filepath = os.path.join(path, filename)
+    if os.path.isdir(filepath):
+        print(filepath)
 
 
-data = read_txt_file('test.txt', True)
+# from utils.files import read_txt_file_as_str, DEBUG_MOD
+#
+# data = read_txt_file_as_str('test.txt')
+# print(f'{__name__=}')
+# print(data)
+# print(DEBUG_MOD)
+
+# def read_txt_file(filename: str = 'test.txt', debug_mod: bool = True) -> str:
+#     with open(filename, 'r', encoding='utf-8') as my_file:
+#         data = my_file.read()
+#     if debug_mod:
+#         print(data)
+#     return data
+#
+#
+# data = read_txt_file('test.txt', True)
 
 ##################################################################################
 # def get_args(*args, **kwargs):
