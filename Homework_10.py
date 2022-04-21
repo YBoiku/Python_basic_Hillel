@@ -33,12 +33,9 @@ def list_of_dates_dict_from_file(path_and_filename):
         all_information_from_file = my_file.read()
     dates = []
     for data_line in all_information_from_file.split('\n'):
-        only_some_date = data_line.split()[0:3]
-        if len(only_some_date) == 3:
-            only_some_date = ' '.join(only_some_date)
-            for split_some_date in only_some_date.split('-'):
-                only_some_date = ''.join(split_some_date)
-                dates.append({'date': f'{only_some_date}'})
+        only_some_date = data_line.split('-')[0]
+        if len(only_some_date.split()) == 3:
+            dates.append({'date': f'{only_some_date}'})
     return dates
 
 
