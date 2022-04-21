@@ -2,20 +2,20 @@ import os
 
 
 ################ 1 ################
-def return_list_of_files_and_subfolders_in_folder(directory_name):
+def dict_lists_of_files_and_subfolders_in_folder(directory_name):
     list_dir = os.listdir(directory_name)
-    x = []
-    y = []
-    z = []
+    files_list_in_dir = []
+    folders_list_in_dir = []
+    dict_lists_of_files_and_subfolders = []
     for filename_in_directory in list_dir:
         file_path_in_directory = os.path.join(path, filename_in_directory)
         if os.path.isfile(file_path_in_directory):
-            x.append(''.join(file_path_in_directory.split(f'{path}\\')))
+            files_list_in_dir.append(''.join(file_path_in_directory.split(f'{path}\\')))
         else:
-            y.append(''.join(file_path_in_directory.split(f'{path}\\')))
-    z.append({'filenames': x, 'dirnames': y})
-    return z
+            folders_list_in_dir.append(''.join(file_path_in_directory.split(f'{path}\\')))
+    dict_lists_of_files_and_subfolders.append({'filenames': files_list_in_dir, 'dirnames': folders_list_in_dir})
+    return dict_lists_of_files_and_subfolders
 
 
 path = 'Homework_directory'
-print(return_list_of_files_and_subfolders_in_folder(path))
+result = dict_lists_of_files_and_subfolders_in_folder(path)

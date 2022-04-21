@@ -56,6 +56,3 @@
 # path = 'Homework_directory'
 # print(return_list_of_files_and_subfolders_in_folder(path))
 ################ 2 ################
-import string
-x = "123 123 13"
-print(x.count())
