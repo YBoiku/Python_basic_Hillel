@@ -6,7 +6,7 @@
 import os
 from utils.files import read_txt_file_as_str
 
-path = "Homework text"
+path = "../All_homework/Homework text"
 list_dir = os.listdir(path)
 # print(list_dir)
 
