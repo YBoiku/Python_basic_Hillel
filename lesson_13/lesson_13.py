@@ -43,6 +43,7 @@ person_1.increase_age()
 persons = [person_1, person_2]
 print(persons)
 
+
 # class Person:  # класс
 #     name: Optional[str] = None  # атрибут класса
 #     age: int = 0
