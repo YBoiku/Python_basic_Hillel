@@ -37,6 +37,7 @@ def sort_dict_list_to_alphabet_or_revers(directory_name: str, sort_bool: bool) -
 
 
 result_sort = sort_dict_list_to_alphabet_or_revers(path, False)
+print(result_sort)
 
 
 ################ 3 ################
@@ -49,3 +50,4 @@ def add_file_or_folder_in_existing_dict_lists(dict_with_file_and_folder: dict, f
 
 
 add_file_or_folder = add_file_or_folder_in_existing_dict_lists(result_dict_list, 'Anacondaz.txt')
+print(add_file_or_folder)
