@@ -47,3 +47,4 @@ path = DirectoryName('Homework_directory')
 result_dict_list = path.dict_of_files_and_subfolders_in_folder()
 result_sort = path.sort_dict_list_to_alphabet_or_revers(True)
 add_file_or_folder = path.add_file_or_folder_in_existing_dict_lists('Anacondaz.txt')
+
