@@ -5,7 +5,7 @@ from typing import Optional
 class DirectoryName:
     def __init__(self, directory_name: str):
         self.directory_name = directory_name
-        self.dict_of_files_and_subfolders_in_folder()
+        self.first_method = self.dict_of_files_and_subfolders_in_folder()
 
     def dict_of_files_and_subfolders_in_folder(self) -> dict:
         list_dir = os.listdir(self.directory_name)
@@ -21,30 +21,28 @@ class DirectoryName:
         return dict_of_files_and_subfolders
 
     def sort_dict_list_to_alphabet_or_revers(self, sort_bool: Optional[bool] = None) -> dict:
-        dict_of_files_and_subfolders = self.dict_of_files_and_subfolders_in_folder()
         if sort_bool is True:
-            ascii_sort_files = sorted(dict_of_files_and_subfolders['filenames'])
-            ascii_sort_folders = sorted(dict_of_files_and_subfolders['dirnames'])
-            dict_of_files_and_subfolders['filenames'] = ascii_sort_files
-            dict_of_files_and_subfolders['dirnames'] = ascii_sort_folders
+            ascii_sort_files = sorted(self.first_method['filenames'])
+            ascii_sort_folders = sorted(self.first_method['dirnames'])
+            self.first_method['filenames'] = ascii_sort_files
+            self.first_method['dirnames'] = ascii_sort_folders
         elif sort_bool is False:
-            rev_ascii_sort_files = sorted(dict_of_files_and_subfolders['filenames'])[::-1]
-            rev_ascii_sort_folders = sorted(dict_of_files_and_subfolders['dirnames'])[::-1]
-            dict_of_files_and_subfolders['filenames'] = rev_ascii_sort_files
-            dict_of_files_and_subfolders['dirnames'] = rev_ascii_sort_folders
-        return dict_of_files_and_subfolders
+            rev_ascii_sort_files = sorted(self.first_method['filenames'])[::-1]
+            rev_ascii_sort_folders = sorted(self.first_method['dirnames'])[::-1]
+            self.first_method['filenames'] = rev_ascii_sort_files
+            self.first_method['dirnames'] = rev_ascii_sort_folders
+        return self.first_method
 
     def add_file_or_folder_in_existing_dict_lists(self, file_or_folder: str) -> dict:
-        dict_list_with_new_file_or_dir = self.dict_of_files_and_subfolders_in_folder()
         if file_or_folder.find('.') != -1:
-            dict_list_with_new_file_or_dir.setdefault('filenames', []).append(file_or_folder)
+            self.first_method.setdefault('filenames', []).append(file_or_folder)
         elif file_or_folder:
-            dict_list_with_new_file_or_dir.setdefault('dirnames', []).append(file_or_folder)
-        return dict_list_with_new_file_or_dir
+            self.first_method.setdefault('dirnames', []).append(file_or_folder)
+        return self.first_method
 
 
 path = DirectoryName('Homework_directory')
 result_dict_list = path.dict_of_files_and_subfolders_in_folder()
-result_sort = path.sort_dict_list_to_alphabet_or_revers(True)
+result_sort = path.sort_dict_list_to_alphabet_or_revers(False)
 add_file_or_folder = path.add_file_or_folder_in_existing_dict_lists('Anacondaz.txt')
-
+print(add_file_or_folder)
