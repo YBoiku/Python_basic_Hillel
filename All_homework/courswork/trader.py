@@ -14,7 +14,7 @@ class Trader:
         return dict_with_info
 
     def rate(self):
-        print(f"1 USD/ {self.account_info['dollar course']} UAH")
+        return f"1 USD/ {self.account_info['dollar course']} UAH"
 
     def available(self):
         return f"UA account balance: {self.account_info['UA balance']}" \
@@ -69,7 +69,6 @@ class Trader:
 
     def write_session_history(self):
         pass
-
 
 
 config_file = Trader('config.json')
