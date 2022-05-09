@@ -1,8 +1,6 @@
 import json
-import os
 import random
 from typing import Optional
-import sys
 
 
 class Trader:

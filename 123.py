@@ -1,13 +1,11 @@
 import json
-import os
 import random
 from typing import Optional
-import sys
 
 
 class Trader:
     def __init__(self, path_info: str):
-        self.path_info = os.path.join(os.path.dirname(sys.argv[0]), path_info)  # под вопросом
+        self.path_info = path_info
         self.account_info = self.read_config()
 
     def read_config(self) -> dict:
@@ -74,4 +72,4 @@ class Trader:
 
 
 config_file = Trader('config.json')
-result = config_file.sell(10)
+# result = config_file.sell(10)
