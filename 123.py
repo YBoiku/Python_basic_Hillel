@@ -1,6 +1,7 @@
 import json
 import random
 from typing import Optional
+import argparse
 
 
 class Trader:
@@ -14,7 +15,7 @@ class Trader:
         return dict_with_info
 
     def rate(self):
-        return f"1 USD/ {self.account_info['dollar course']} UAH"
+        return f"1 USD / {self.account_info['dollar course']} UAH"
 
     def available(self):
         return f"UA account balance: {self.account_info['UA balance']}" \
@@ -72,4 +73,3 @@ class Trader:
 
 
 config_file = Trader('config.json')
-# result = config_file.sell(10)

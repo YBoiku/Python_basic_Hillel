@@ -1,12 +1,17 @@
 import json
 import random
 from typing import Optional
+from argparse import ArgumentParser
 
 
 class Trader:
     def __init__(self, path_info: str):
         self.path_info = path_info
         self.account_info = self.read_config()
+        args = ArgumentParser()
+        args.add_argument("name")
+        args = args.parse_args
+        print(args)
 
     def read_config(self) -> dict:
         with open(self.path_info, 'r') as file:
@@ -14,7 +19,7 @@ class Trader:
         return dict_with_info
 
     def rate(self):
-        return f"1 USD/ {self.account_info['dollar course']} UAH"
+        return f"1 USD / {self.account_info['dollar course']} UAH"
 
     def available(self):
         return f"UA account balance: {self.account_info['UA balance']}" \
@@ -72,4 +77,3 @@ class Trader:
 
 
 config_file = Trader('config.json')
-# result = config_file.sell(10)
