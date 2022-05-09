@@ -5,7 +5,7 @@ from argparse import ArgumentParser
 
 
 class Trader:
-    def __init__(self, path_info: str):
+    def __init__(self, path_info):
         self.path_info = path_info
         self.account_info = self.read_config()
 
@@ -15,7 +15,7 @@ class Trader:
         return dict_with_info
 
     def rate(self):
-        return f"1 USD / {self.account_info['dollar course']} UAH"
+        print(f"1 USD / {self.account_info['dollar course']} UAH")
 
     def available(self):
         return f"UA account balance: {self.account_info['UA balance']}" \
@@ -71,14 +71,13 @@ class Trader:
     def write_session_history(self):
         pass
 
-if __name__ = __main__:
-    obj = Trader
-    print()
 
 args = ArgumentParser()
 args.add_argument("CLI")
-args = vars(Trader)
-print(args)
-
+args = vars(args.parse_args())
+if args["CLI"] == "RATE":
+    Trader.rate(account_info)
 config_file = Trader('config.json')
 
+# if "CLI" == "RATE":
+#     print(config_file.rate())

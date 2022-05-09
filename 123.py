@@ -1,7 +1,7 @@
 import json
 import random
 from typing import Optional
-import argparse
+from argparse import ArgumentParser
 
 
 class Trader:
@@ -72,4 +72,12 @@ class Trader:
         pass
 
 
+args = ArgumentParser()
+args.add_argument("CLI")
+args = vars(args.parse_args())
+if args == "RATE":
+    print(Trader.rate())
 config_file = Trader('config.json')
+
+# if "CLI" == "RATE":
+#     print(config_file.rate())
