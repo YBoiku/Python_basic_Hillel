@@ -8,10 +8,6 @@ class Trader:
     def __init__(self, path_info: str):
         self.path_info = path_info
         self.account_info = self.read_config()
-        args = ArgumentParser()
-        args.add_argument("name")
-        args = args.parse_args
-        print(args)
 
     def read_config(self) -> dict:
         with open(self.path_info, 'r') as file:
@@ -75,5 +71,14 @@ class Trader:
     def write_session_history(self):
         pass
 
+if __name__ = __main__:
+    obj = Trader
+    print()
+
+args = ArgumentParser()
+args.add_argument("CLI")
+args = vars(Trader)
+print(args)
 
 config_file = Trader('config.json')
+
