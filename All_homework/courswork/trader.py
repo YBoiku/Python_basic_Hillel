@@ -54,13 +54,13 @@ class Trader:
 
     def buy_all(self) -> dict:
         actual_uah: int = 0
-        actual_usd: int = self.account_info['UA balance'] / self.account_info['dollar course']
+        actual_usd: int = self.ua_balance / self.usd_course
         self.account_info['UA balance'] = round(actual_uah, 2)
         self.account_info['USD balance'] += round(actual_usd, 2)
         return self.account_info
 
     def sell_all(self) -> dict:
-        actual_uah = self.account_info['USD balance'] * self.account_info['dollar course']
+        actual_uah = self.usd_balance * self.usd_course
         actual_usd = 0
         self.account_info['UA balance'] += round(actual_uah, 2)
         self.account_info['USD balance'] = round(actual_usd, 2)
@@ -105,6 +105,5 @@ elif args["CLI"] == "SELL" and args["SUM"] == "ALL":
     write_session_history(config_file.sell_all())
 elif args["CLI"] == "NEXT":
     write_session_history(config_file.next())
-
 # elif args["CLI"] == "RESTART":
 #     config_file.restart()
