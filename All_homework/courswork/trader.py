@@ -55,6 +55,7 @@ class Trader:
     def buy_all(self):
         actual_uah: int = 0
         actual_usd: int = self.account_info['UA balance'] / self.account_info['dollar course']
+        # self.account_info['UA balance'] = self.account_info['UA balance'] - self.account_info['UA balance']
         self.account_info['UA balance'] = actual_uah
         self.account_info['USD balance'] += round(actual_usd, 2)
         return self.account_info
@@ -86,8 +87,8 @@ def write_session_history(data):
 
 args = ArgumentParser()
 args.add_argument("CLI")
-args.add_argument("SUM", type=int, nargs='?', default=)
-args.add_argument("ALL")
+args.add_argument("SUM", type=int, nargs='?', default=0)
+# args.add_argument("ALL")
 args = vars(args.parse_args())
 print(args)
 amount = args["SUM"]
