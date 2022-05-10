@@ -1,4 +1,3 @@
-import csv
 import json
 import random
 from typing import Optional
@@ -39,7 +38,6 @@ class Trader:
             actual_usd = available
             self.account_info['UA balance'] = round(actual_uah, 2)
             self.account_info['USD balance'] += round(actual_usd, 2)
-            print(self.account_info)
         return self.account_info
 
     def sell(self, available: int) -> dict:
@@ -50,7 +48,6 @@ class Trader:
             actual_uah: int = available * self.usd_course
             self.account_info['UA balance'] += round(actual_uah, 2)
             self.account_info['USD balance'] = round(actual_usd, 2)
-            print(self.account_info)
         return self.account_info
 
     def buy_all(self) -> dict:
