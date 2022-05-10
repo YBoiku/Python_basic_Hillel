@@ -89,7 +89,6 @@ args = ArgumentParser()
 args.add_argument("CLI")
 args.add_argument("SUM", type=str, nargs='?', default=0)
 args = vars(args.parse_args())
-print(args)
 amount = args["SUM"]
 config_file = Trader("config.json", "trader_session_history.json")
 if args["CLI"] == "RATE":
