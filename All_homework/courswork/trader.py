@@ -42,10 +42,10 @@ class Trader:
         return self.account_info
 
     def sell(self, available: int) -> dict:
-        if available > self.account_info['USD balance']:
+        if available > self.ua_balance:
             print(f"UNAVAILABLE, REQUIRED BALANCE USD {self.usd_balance}, AVAILABLE {available}")
         else:
-            actual_usd: int = self.account_info['USD balance'] - available
+            actual_usd: int = self.ua_balance - available
             actual_uah: int = available * self.usd_course
             self.account_info['UA balance'] += round(actual_uah, 2)
             self.account_info['USD balance'] = round(actual_usd, 2)
@@ -95,9 +95,9 @@ if args["CLI"] == "RATE":
     config_file.rate()
 elif args["CLI"] == "AVAILABLE":
     config_file.available()
-elif args["CLI"] == "BUY":
+elif args["CLI"] == "BUY" and args["SUM"] != "ALL":
     write_session_history(config_file.buy(int(amount)))
-elif args["CLI"] == "SELL":
+elif args["CLI"] == "SELL" and args["SUM"] != "ALL":
     write_session_history(config_file.sell(int(amount)))
 elif args["CLI"] == "BUY" and args["SUM"] == "ALL":
     write_session_history(config_file.buy_all())
