@@ -29,33 +29,33 @@ class Trader:
         print(f"UA account balance: {self.ua_balance}"
               f"\nUSD account balance: {self.usd_balance}")
 
-    def buy(self, number: Optional[int] = 0) -> dict:
-        need_uah = number * self.usd_course
+    def buy(self, available: Optional[int] = 0) -> dict:
+        need_uah = available * self.usd_course
         if need_uah > self.ua_balance:
             print(f"UNAVAILABLE, REQUIRED BALANCE UAH {self.ua_balance}, AVAILABLE {need_uah}")
         else:
             actual_uah = self.ua_balance - need_uah
-            actual_usd = number
+            actual_usd = available
             self.account_info['UA balance'] = round(actual_uah, 2)
             self.account_info['USD balance'] += round(actual_usd, 2)
             print(self.account_info)
         return self.account_info
 
-    def sell(self, available: Optional[int] = 0) -> dict:
+    def sell(self, available: int) -> dict:
         if available > self.usd_balance:
             print(f"UNAVAILABLE, REQUIRED BALANCE USD {self.usd_balance}, AVAILABLE {available}")
         else:
             actual_usd: int = self.usd_balance - available
             actual_uah: int = available * self.usd_course
-            self.account_info['USD balance'] = round(actual_usd, 2)
             self.account_info['UA balance'] += round(actual_uah, 2)
+            self.account_info['USD balance'] = round(actual_usd, 2)
             print(self.account_info)
         return self.account_info
 
-    def buy_all(self):
+    def buy_all(self) -> dict:
         actual_uah: int = 0
         actual_usd: int = self.ua_balance / self.usd_course
-        self.account_info['UA balance'] = actual_uah
+        self.account_info['UA balance'] = round(actual_uah, 2)
         self.account_info['USD balance'] += round(actual_usd, 2)
         return self.account_info
 
@@ -63,7 +63,7 @@ class Trader:
         actual_uah = self.usd_balance * self.usd_course
         actual_usd = 0
         self.account_info['UA balance'] += round(actual_uah, 2)
-        self.account_info['USD balance'] = actual_usd
+        self.account_info['USD balance'] = round(actual_usd, 2)
         return self.account_info
 
     def next(self) -> dict:
@@ -75,37 +75,35 @@ class Trader:
         self.account_info['dollar course'] = round(new_course, 2)
         return self.account_info
 
-    # def restart(self):
-    #     pass
-
 
 def write_session_history(data):
     with open("trader_session_history.json", 'w') as file:
         json.dump(data, file, indent=2)
 
 
-# def restart():
-#     with open("trader_session_history.json", 'w') as file:
-#         json.dump('restart', file)
+def restart():
+    with open("trader_session_history.json", 'w') as file:
+        json.dump(file)
 
 
 args = ArgumentParser()
 args.add_argument("CLI")
-args.add_argument("SUM", type=int, nargs='?')
+args.add_argument("SUM", type=str, nargs='?', default=0)
 args = vars(args.parse_args())
+print(args)
 amount = args["SUM"]
 config_file = Trader("config.json", "trader_session_history.json")
 if args["CLI"] == "RATE":
     config_file.rate()
 elif args["CLI"] == "AVAILABLE":
     config_file.available()
-elif args["CLI"] == "BUY":
-    write_session_history(config_file.buy(amount))
-elif args["CLI"] == "SELL":
-    write_session_history(config_file.sell(amount))
-elif args["CLI"] == "BUY_ALL":
+elif args["CLI"] == "BUY" and args["SUM"] != "ALL":
+    write_session_history(config_file.buy(int(amount)))
+elif args["CLI"] == "SELL" and args["SUM"] != "ALL":
+    write_session_history(config_file.sell(int(amount)))
+elif args["CLI"] == "BUY" and args["SUM"] == "ALL":
     write_session_history(config_file.buy_all())
-elif args["CLI"] == "SELL_ALL":
+elif args["CLI"] == "SELL" and args["SUM"] == "ALL":
     write_session_history(config_file.sell_all())
 elif args["CLI"] == "NEXT":
     write_session_history(config_file.next())

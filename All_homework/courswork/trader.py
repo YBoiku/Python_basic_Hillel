@@ -1,3 +1,4 @@
+import csv
 import json
 import random
 from typing import Optional
@@ -42,10 +43,10 @@ class Trader:
         return self.account_info
 
     def sell(self, available: int) -> dict:
-        if available > self.ua_balance:
+        if available > self.usd_balance:
             print(f"UNAVAILABLE, REQUIRED BALANCE USD {self.usd_balance}, AVAILABLE {available}")
         else:
-            actual_usd: int = self.ua_balance - available
+            actual_usd: int = self.usd_balance - available
             actual_uah: int = available * self.usd_course
             self.account_info['UA balance'] += round(actual_uah, 2)
             self.account_info['USD balance'] = round(actual_usd, 2)
@@ -75,8 +76,11 @@ class Trader:
         self.account_info['dollar course'] = round(new_course, 2)
         return self.account_info
 
-    # def restart(self):
-    #     pass
+    def restart(self):
+        with open(self.info_path, 'r') as file:
+            dict_with_info = json.load(file)
+        with open(self.history_info_path, 'w') as file:
+            json.dump(dict_with_info, file, indent=2)
 
 
 def write_session_history(data):
@@ -105,5 +109,5 @@ elif args["CLI"] == "SELL" and args["SUM"] == "ALL":
     write_session_history(config_file.sell_all())
 elif args["CLI"] == "NEXT":
     write_session_history(config_file.next())
-# elif args["CLI"] == "RESTART":
-#     config_file.restart()
+elif args["CLI"] == "RESTART":
+    config_file.restart()
