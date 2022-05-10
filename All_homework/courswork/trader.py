@@ -54,7 +54,7 @@ class Trader:
 
     def buy_all(self):
         actual_uah: int = 0
-        actual_usd: int = self.ua_balance / self.usd_course
+        actual_usd: int = self.account_info['UA balance'] / self.account_info['dollar course']
         self.account_info['UA balance'] = actual_uah
         self.account_info['USD balance'] += round(actual_usd, 2)
         return self.account_info
@@ -87,8 +87,10 @@ def write_session_history(data):
 args = ArgumentParser()
 args.add_argument("CLI")
 args.add_argument("SUM", type=int, nargs='?')
+args.add_argument("ALL")
 args = vars(args.parse_args())
 amount = args["SUM"]
+all_balance = args["ALL"]
 config_file = Trader("config.json", "trader_session_history.json")
 if args["CLI"] == "RATE":
     config_file.rate()
@@ -98,7 +100,7 @@ elif args["CLI"] == "BUY":
     write_session_history(config_file.buy(amount))
 elif args["CLI"] == "SELL":
     write_session_history(config_file.sell(amount))
-elif args["CLI"] == "BUY_ALL":
+elif args["CLI"] == "BUY" and args["SUM"] == "ALL":
     write_session_history(config_file.buy_all())
 elif args["CLI"] == "SELL_ALL":
     write_session_history(config_file.sell_all())
