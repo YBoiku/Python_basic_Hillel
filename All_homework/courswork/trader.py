@@ -51,17 +51,23 @@ class Trader:
         return self.account_info
 
     def buy_all(self) -> dict:
-        actual_uah: int = 0
-        actual_usd: int = self.ua_balance / self.usd_course
-        self.account_info['UA balance'] = round(actual_uah, 2)
-        self.account_info['USD balance'] += round(actual_usd, 2)
+        if self.ua_balance == 0:  # Добавил проверку, не нравилось что при 0-ом балансе не было предупреждения
+            print(f"YOUR CURRENT BALANCE UAH {self.ua_balance}")
+        else:
+            actual_uah: int = 0
+            actual_usd: int = self.ua_balance / self.usd_course
+            self.account_info['UA balance'] = round(actual_uah, 2)
+            self.account_info['USD balance'] += round(actual_usd, 2)
         return self.account_info
 
     def sell_all(self) -> dict:
-        actual_uah = self.usd_balance * self.usd_course
-        actual_usd = 0
-        self.account_info['UA balance'] += round(actual_uah, 2)
-        self.account_info['USD balance'] = round(actual_usd, 2)
+        if self.usd_balance == 0:  # Добавил проверку, не нравилось что при 0-ом балансе не было предупреждения
+            print(f"YOUR CURRENT BALANCE USD {self.usd_balance}")
+        else:
+            actual_uah = self.usd_balance * self.usd_course
+            actual_usd = 0
+            self.account_info['UA balance'] += round(actual_uah, 2)
+            self.account_info['USD balance'] = round(actual_usd, 2)
         return self.account_info
 
     def next(self) -> dict:
@@ -89,16 +95,16 @@ args = ArgumentParser()
 args.add_argument("CLI")
 args.add_argument("SUM", type=str, nargs='?', default=0)
 args = vars(args.parse_args())
-amount = int(args["SUM"])
+amount = args["SUM"]
 config_file = Trader("config.json", "trader_session_history.json")
 if args["CLI"] == "RATE":
     config_file.rate()
 elif args["CLI"] == "AVAILABLE":
     config_file.available()
 elif args["CLI"] == "BUY" and args["SUM"] != "ALL":
-    write_session_history(config_file.buy(amount))
+    write_session_history(config_file.buy(int(amount)))
 elif args["CLI"] == "SELL" and args["SUM"] != "ALL":
-    write_session_history(config_file.sell(amount))
+    write_session_history(config_file.sell(int(amount)))
 elif args["CLI"] == "BUY" and args["SUM"] == "ALL":
     write_session_history(config_file.buy_all())
 elif args["CLI"] == "SELL" and args["SUM"] == "ALL":

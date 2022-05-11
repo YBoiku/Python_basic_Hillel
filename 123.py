@@ -38,7 +38,6 @@ class Trader:
             actual_usd = available
             self.account_info['UA balance'] = round(actual_uah, 2)
             self.account_info['USD balance'] += round(actual_usd, 2)
-            print(self.account_info)
         return self.account_info
 
     def sell(self, available: int) -> dict:
@@ -49,7 +48,6 @@ class Trader:
             actual_uah: int = available * self.usd_course
             self.account_info['UA balance'] += round(actual_uah, 2)
             self.account_info['USD balance'] = round(actual_usd, 2)
-            print(self.account_info)
         return self.account_info
 
     def buy_all(self) -> dict:
@@ -75,22 +73,22 @@ class Trader:
         self.account_info['dollar course'] = round(new_course, 2)
         return self.account_info
 
+    def restart(self):
+        with open(self.info_path, 'r') as file:
+            dict_with_info = json.load(file)
+        with open(self.history_info_path, 'w') as file:
+            json.dump(dict_with_info, file, indent=2)
+
 
 def write_session_history(data):
     with open("trader_session_history.json", 'w') as file:
         json.dump(data, file, indent=2)
 
 
-def restart():
-    with open("trader_session_history.json", 'w') as file:
-        json.dump(file)
-
-
 args = ArgumentParser()
 args.add_argument("CLI")
 args.add_argument("SUM", type=str, nargs='?', default=0)
 args = vars(args.parse_args())
-print(args)
 amount = args["SUM"]
 config_file = Trader("config.json", "trader_session_history.json")
 if args["CLI"] == "RATE":
@@ -108,4 +106,4 @@ elif args["CLI"] == "SELL" and args["SUM"] == "ALL":
 elif args["CLI"] == "NEXT":
     write_session_history(config_file.next())
 elif args["CLI"] == "RESTART":
-    restart()
+    config_file.restart()
