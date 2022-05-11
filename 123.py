@@ -81,7 +81,7 @@ class Trader:
 
 
 def write_session_history(data):
-    with open("trader_session_history.json", 'w') as file:
+    with open("trader_last_session.json", 'w') as file:
         json.dump(data, file, indent=2)
 
 
@@ -90,7 +90,7 @@ args.add_argument("CLI")
 args.add_argument("SUM", type=str, nargs='?', default=0)
 args = vars(args.parse_args())
 amount = args["SUM"]
-config_file = Trader("config.json", "trader_session_history.json")
+config_file = Trader("config.json", "trader_last_session.json")
 if args["CLI"] == "RATE":
     config_file.rate()
 elif args["CLI"] == "AVAILABLE":
