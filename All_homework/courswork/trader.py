@@ -2,6 +2,7 @@ import json
 import random
 from typing import Optional
 from argparse import ArgumentParser
+import os
 
 
 class Trader:
@@ -14,11 +15,14 @@ class Trader:
         self.usd_course = self.account_info['dollar course']
 
     def read_config(self) -> dict:
-        if self.history_info_path:
-            with open(self.history_info_path, 'r') as file:
-                dict_with_info = json.load(file)
-        else:
+        if os.path.isfile(self.history_info_path) is False:
             with open(self.info_path, 'r') as file:
+                dict_with_info = json.load(file)
+            history_file = open(self.history_info_path, 'w')
+            history_file.write(self.info_path)
+            history_file.close()
+        else:
+            with open(self.history_info_path, 'r') as file:
                 dict_with_info = json.load(file)
         return dict_with_info
 
@@ -80,10 +84,7 @@ class Trader:
         return self.account_info
 
     def restart(self):
-        with open(self.info_path, 'r') as file:
-            dict_with_info = json.load(file)
-        with open(self.history_info_path, 'w') as file:
-            json.dump(dict_with_info, file, indent=2)
+        os.remove(self.history_info_path)
 
 
 def write_session_history(data):

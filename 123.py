@@ -14,10 +14,10 @@ class Trader:
         self.usd_course = self.account_info['dollar course']
 
     def read_config(self) -> dict:
-        try:
+        if self.history_info_path:
             with open(self.history_info_path, 'r') as file:
                 dict_with_info = json.load(file)
-        except:
+        else:
             with open(self.info_path, 'r') as file:
                 dict_with_info = json.load(file)
         return dict_with_info
@@ -51,7 +51,7 @@ class Trader:
         return self.account_info
 
     def buy_all(self) -> dict:
-        if self.ua_balance == 0:  # Добавил проверку, не нравилось что при 0-ом балансе не было предупреждения
+        if self.ua_balance == 0:
             print(f"YOUR CURRENT BALANCE UAH {self.ua_balance}")
         else:
             actual_uah: int = 0
@@ -61,7 +61,7 @@ class Trader:
         return self.account_info
 
     def sell_all(self) -> dict:
-        if self.usd_balance == 0:  # Добавил проверку, не нравилось что при 0-ом балансе не было предупреждения
+        if self.usd_balance == 0:
             print(f"YOUR CURRENT BALANCE USD {self.usd_balance}")
         else:
             actual_uah = self.usd_balance * self.usd_course
