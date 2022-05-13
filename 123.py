@@ -51,17 +51,23 @@ class Trader:
         return self.account_info
 
     def buy_all(self) -> dict:
-        actual_uah: int = 0
-        actual_usd: int = self.ua_balance / self.usd_course
-        self.account_info['UA balance'] = round(actual_uah, 2)
-        self.account_info['USD balance'] += round(actual_usd, 2)
+        if self.ua_balance == 0:  # Добавил проверку, не нравилось что при 0-ом балансе не было предупреждения
+            print(f"YOUR CURRENT BALANCE UAH {self.ua_balance}")
+        else:
+            actual_uah: int = 0
+            actual_usd: int = self.ua_balance / self.usd_course
+            self.account_info['UA balance'] = round(actual_uah, 2)
+            self.account_info['USD balance'] += round(actual_usd, 2)
         return self.account_info
 
     def sell_all(self) -> dict:
-        actual_uah = self.usd_balance * self.usd_course
-        actual_usd = 0
-        self.account_info['UA balance'] += round(actual_uah, 2)
-        self.account_info['USD balance'] = round(actual_usd, 2)
+        if self.usd_balance == 0:  # Добавил проверку, не нравилось что при 0-ом балансе не было предупреждения
+            print(f"YOUR CURRENT BALANCE USD {self.usd_balance}")
+        else:
+            actual_uah = self.usd_balance * self.usd_course
+            actual_usd = 0
+            self.account_info['UA balance'] += round(actual_uah, 2)
+            self.account_info['USD balance'] = round(actual_usd, 2)
         return self.account_info
 
     def next(self) -> dict:

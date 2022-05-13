@@ -14,10 +14,10 @@ class Trader:
         self.usd_course = self.account_info['dollar course']
 
     def read_config(self) -> dict:
-        try:
+        if self.history_info_path != 0:
             with open(self.history_info_path, 'r') as file:
                 dict_with_info = json.load(file)
-        except:
+        else:
             with open(self.info_path, 'r') as file:
                 dict_with_info = json.load(file)
         return dict_with_info
