@@ -28,10 +28,12 @@ class Trader:
 
     def rate(self):
         print(f"1 USD / {self.usd_course} UAH")
+        return self.account_info
 
     def available(self):
         print(f"UA account balance: {self.ua_balance}"
               f"\nUSD account balance: {self.usd_balance}")
+        return self.account_info
 
     def buy(self, available: Optional[int] = 0) -> dict:
         need_uah = available * self.usd_course
@@ -99,9 +101,9 @@ args = vars(args.parse_args())
 amount = args["SUM"]
 config_file = Trader("config.json", "trader_last_session.json")
 if args["CLI"] == "RATE":
-    config_file.rate()
+    write_session_history(config_file.rate())
 elif args["CLI"] == "AVAILABLE":
-    config_file.available()
+    write_session_history(config_file.available())
 elif args["CLI"] == "BUY" and args["SUM"] != "ALL":
     write_session_history(config_file.buy(int(amount)))
 elif args["CLI"] == "SELL" and args["SUM"] != "ALL":
