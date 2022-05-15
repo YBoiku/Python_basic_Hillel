@@ -96,20 +96,20 @@ args.add_argument("CLI")
 args.add_argument("SUM", type=str, nargs='?', default=0)
 args = vars(args.parse_args())
 amount = args["SUM"]
-config_file = Trader("config.json", "trader_last_session.json")
+trader_account = Trader("config.json", "trader_last_session.json")
 if args["CLI"] == "RATE":
-    config_file.rate()
+    trader_account.rate()
 elif args["CLI"] == "AVAILABLE":
-    config_file.available()
+    trader_account.available()
 elif args["CLI"] == "BUY" and args["SUM"] != "ALL":
-    write_session_history(config_file.buy(int(amount)))
+    write_session_history(trader_account.buy(int(amount)))
 elif args["CLI"] == "SELL" and args["SUM"] != "ALL":
-    write_session_history(config_file.sell(int(amount)))
+    write_session_history(trader_account.sell(int(amount)))
 elif args["CLI"] == "BUY" and args["SUM"] == "ALL":
-    write_session_history(config_file.buy_all())
+    write_session_history(trader_account.buy_all())
 elif args["CLI"] == "SELL" and args["SUM"] == "ALL":
-    write_session_history(config_file.sell_all())
+    write_session_history(trader_account.sell_all())
 elif args["CLI"] == "NEXT":
-    write_session_history(config_file.next())
+    write_session_history(trader_account.next())
 elif args["CLI"] == "RESTART":
-    config_file.restart()
+    trader_account.restart()
