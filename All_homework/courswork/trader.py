@@ -18,9 +18,6 @@ class Trader:
         if os.path.isfile(self.history_info_path) is False:
             with open(self.info_path, 'r') as file:
                 dict_with_info = json.load(file)
-            create_history_info_file = open(self.history_info_path, 'w')
-            create_history_info_file.write(self.info_path)
-            create_history_info_file.close()
         else:
             with open(self.history_info_path, 'r') as file:
                 dict_with_info = json.load(file)
@@ -101,9 +98,9 @@ args = vars(args.parse_args())
 amount = args["SUM"]
 config_file = Trader("config.json", "trader_last_session.json")
 if args["CLI"] == "RATE":
-    write_session_history(config_file.rate())
+    config_file.rate()
 elif args["CLI"] == "AVAILABLE":
-    write_session_history(config_file.available())
+    config_file.available()
 elif args["CLI"] == "BUY" and args["SUM"] != "ALL":
     write_session_history(config_file.buy(int(amount)))
 elif args["CLI"] == "SELL" and args["SUM"] != "ALL":
